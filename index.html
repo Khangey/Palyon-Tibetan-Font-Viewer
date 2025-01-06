@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="bo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>དཔལ་ཡོན་ཡིག་གཟུགས་ཞིབ་བཤེར་མ་ལག| Palyon Tibetan Font Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preload" href="fonts/Qomolangma-Uchen Sarchung.ttf" as="font" type="font/ttf" crossorigin>
+    <style id="preloadedFonts"></style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="title-section">
+                    <h1>དཔལ་ཡོན་ཡིག་གཟུགས་ཞིབ་བཤེར་མ་ལག</h1><br>
+                    <div class="copyright-info">
+                        <span class="blue"></span>
+                    </div>
+                </div>
+                <div class="font-upload-section">
+                    <input type="file" id="fontUpload" accept=".ttf,.otf" multiple class="font-input">
+                    <label for="fontUpload" class="upload-btn">
+                        <i class="fas fa-upload"></i> ཡིག་གཟུགས་ཡིག་ཆ་འཇུག་པ།
+                    </label>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="editor-section">
+                <div class="toolbar">
+                    <div id="fontList" class="font-list">
+                        <!-- 字体会通过 JavaScript 动态添加到这里 -->
+                    </div>
+                    <div class="tool-group">
+                        
+                        <div class="font-size-control">
+                            <input type="range" id="fontSize" class="font-size-slider" 
+                                   min="10" max="99" value="16" step="1">
+                            <span id="fontSizeDisplay" class="font-size-display">16px</span>
+                        </div>
+                        <div class="style-buttons">
+                            <button id="boldBtn" class="tool-btn" title="མཐུག་པོ།"><i class="fas fa-bold"></i></button>
+                            <button id="italicBtn" class="tool-btn" title="གསེག་མ།"><i class="fas fa-italic"></i></button>
+                            <button id="underlineBtn" class="tool-btn" title="འོག་ཐིག"><i class="fas fa-underline"></i></button>
+                            <button id="strikeBtn" class="tool-btn" title="བཅད་ཐིག"><i class="fas fa-strikethrough"></i></button>
+                        </div>
+                        <div class="align-buttons">
+                            <button id="alignLeftBtn" class="tool-btn" title="གཡོན་སྒྲིག"><i class="fas fa-align-left"></i></button>
+                            <button id="alignCenterBtn" class="tool-btn" title="དཀྱིལ་སྒྲིག"><i class="fas fa-align-center"></i></button>
+                            <button id="alignRightBtn" class="tool-btn" title="གཡས་སྒྲིག"><i class="fas fa-align-right"></i></button>
+                            <button id="alignJustifyBtn" class="tool-btn" title="ཆ་སྙོམས།"><i class="fas fa-align-justify"></i></button>
+                        </div>
+                        <div class="list-buttons">
+                            <button id="bulletListBtn" class="tool-btn" title="ཨང་གྲངས་མེད་པའི་ཐོ།"><i class="fas fa-list-ul"></i></button>
+                            <button id="numberListBtn" class="tool-btn" title="ཨང་གྲངས་ཅན་གྱི་ཐོ།"><i class="fas fa-list-ol"></i></button>
+                        </div>
+                        <div class="indent-buttons">
+                            <button id="indentBtn" class="tool-btn" title="གཡས་ཀྱི་བར་ཐག"><i class="fas fa-indent"></i></button>
+                            <button id="outdentBtn" class="tool-btn" title="གཡོན་གྱི་བར་ཐག"><i class="fas fa-outdent"></i></button>
+                        </div>
+                        <div class="style-selector"></div>
+                            <button class="style-btn" data-style="morandi-blue">རྒྱབ་ལྗོངས་སྔོན་པོ།</button>
+                            <button class="style-btn" data-style="morandi-red">རྒྱབ་ལྗོངས་དམར་པོ།</button>
+                            <button class="style-btn" data-style="morandi-yellow">རྒྱབ་ལྗོངས་སེར་པོ།</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="note-container">
+                    <div id="noteEditor" class="note" contenteditable="true">
+                        འདིར་ཡི་གེ་འབྲི་རོགས།
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="downloadImage" class="action-btn">
+                        <i class="fas fa-image"></i> པར་རིས་ཉར་ཚགས།
+                    </button>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section blue">
+                    <h3>པར་དབང་།</h3>
+                    <p>©པར་དབང་ཡོད་ཚད་བོད་ལྗོངས་དཔལ་ཡོན་ཚན་རྩལ་ཚད་ཡོད་ཀུང་སིས་ངོས་འཛིན་ཡོད།｜བོད་ICP2025002</p>
+                </div>
+                <div class="footer-section red">
+                    <h3>འབྲེལ་མཐུད།</h3>
+                    <p>གློག་འཕྲིན། open@palyon.cc</p>
+                </div>
+                <div class="footer-section yellow">
+                    <h3>གསར་སྤེལ་བ།</h3>
+                    <p>དཔལ་ཡོན་བོད་ཡིག་ཆ་འཕྲིན་སྡེ་ཁག</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

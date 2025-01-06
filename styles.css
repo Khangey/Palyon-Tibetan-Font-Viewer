@@ -1,0 +1,541 @@
+@font-face {
+    font-family: 'Qomolangma-UchenSarchung';
+    src: url('fonts/Qomolangma-Uchen Sarchung.ttf') format('truetype');
+    font-display: swap;
+}
+
+:root {
+    /* 谷歌品牌色 */
+    --primary-color: #4285F4;    /* 谷歌蓝 */
+    --secondary-color: #DB4437;  /* 谷歌红 */
+    --accent-color: #F4B400;     /* 谷歌黄 */
+    
+    /* 辅助色 */
+    --text-color: #333333;
+    --border-color: #E0E0E0;
+    --bg-color: #F8F9FA;
+    --hover-color: #E8F0FE;      /* 蓝色hover效果 */
+    --error-color: #DB4437;      /* 错误提示用红色 */
+    --success-color: #0F9D58;    /* 成功提示用绿色 */
+    
+    /* 字体 */
+    --tibetan-font: 'Qomolangma-Uchen Sarchung', 'Microsoft Himalaya', 'Noto Sans Tibetan', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--tibetan-font);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* 确保所有按钮和输入框也使用同样的字体 */
+button, input, select, textarea {
+    font-family: var(--tibetan-font);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+/* 上传按钮样式 */
+.font-upload-section {
+    margin-bottom: 2rem;
+}
+
+.font-input {
+    display: none;
+}
+
+.upload-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 工具栏样式调整 */
+.toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;  /* 减小垂直间距 */
+    margin-bottom: 1rem;
+    padding: 0.75rem;  /* 减小内边距 */
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tool-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;  /* 减小按钮组之间的间距 */
+    align-items: center;
+    padding: 0.25rem;  /* 减小内边距 */
+    border-top: 1px solid var(--border-color);
+}
+
+/* 按钮组样式调整 */
+.style-buttons,
+.align-buttons,
+.list-buttons,
+.indent-buttons,
+.style-selector {
+    display: flex;
+    gap: 0.25rem;  /* 减小按钮之间的间距 */
+    padding: 0.15rem;  /* 减小内边距 */
+    border-radius: 4px;
+    background: var(--bg-color);
+}
+
+/* 工具按钮样式调整 */
+.tool-btn,
+.style-btn {
+    padding: 0.35rem 0.75rem;  /* 减小按钮内边距 */
+    border: 1px solid var(--border-color);
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tool-btn:hover {
+    background: var(--bg-color);
+    border-color: var(--primary-color);
+}
+
+.tool-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* 颜色工具样式 */
+.color-tools {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.color-tools input[type="color"] {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 便签容器样式 */
+.note-container {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* 编辑器基础样式优化 */
+#noteEditor.note {
+    width: 800px;
+    height: 400px;
+    padding: 40px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: auto;
+    transition: all 0.3s ease;
+    
+    /* 文字排版优化 - 藏文特殊处理 */
+    line-height: 2.5;         /* 保持行高 */
+    letter-spacing: 0.1em;    /* 减小字间距 */
+    word-spacing: 0.2em;      /* 减小词间距 */
+    text-align: left;         /* 保持左对齐 */
+    color: #000000;          /* 默认黑色文字 */
+}
+
+/* 编辑器默认文字样式 */
+#noteEditor.note[contenteditable="true"]:empty:before {
+    content: attr(placeholder);
+    color: #999999;          /* 占位符文字颜色 */
+    font-style: italic;
+}
+
+/* 段落样式优化 */
+#noteEditor.note p {
+    margin: 1.5em 0;          /* 增加段落间距 */
+    text-indent: 0;           /* 藏文不需要段落缩进 */
+}
+
+/* 列表样式优化 */
+#noteEditor.note ul,
+#noteEditor.note ol {
+    padding-left: 2em;
+    margin: 1em 0;
+}
+
+#noteEditor.note li {
+    margin: 0.5em 0;
+    line-height: 1.8;
+}
+
+/* 编辑器获得焦点时保持样式 */
+#noteEditor.note:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(66, 133, 244, 0.2);
+}
+
+/* 护眼风格 */
+.eyecare {
+    background: #C7EDCC;
+    border: 1px solid #A8D5AE;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    color: #2C3E50;
+}
+
+/* 科技风格 */
+.tech {
+    background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+    color: #64ffda;
+    border: 2px solid #64ffda;
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.2),
+                inset 0 0 10px rgba(100, 255, 218, 0.2);
+}
+
+/* 纸张风格 */
+.paper {
+    background: #fff9f0;
+    border: 1px solid #d4b483;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-image: 
+        linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+        linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100% 1.2em;
+    padding: 2rem;
+}
+
+/* 谷歌配色方案 */
+#noteEditor.morandi-blue {
+    background-color: rgba(66, 133, 244, 0.15) !important;  /* 谷歌蓝 */
+    border-color: var(--primary-color);
+    color: #000000;
+}
+
+#noteEditor.morandi-red {
+    background-color: rgba(219, 68, 55, 0.15) !important;   /* 谷歌红 */
+    border-color: var(--secondary-color);
+    color: #000000;
+}
+
+#noteEditor.morandi-yellow {
+    background-color: rgba(244, 180, 0, 0.15) !important;   /* 谷歌黄 */
+    border-color: var(--accent-color);
+    color: #000000;
+}
+
+/* 移除之前的样式 */
+.eyecare, .tech, .paper {
+    display: none;
+}
+
+/* 添加科技风格的动画效果 */
+@keyframes scan {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* 添加便签容器的悬停效果 */
+.note:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* 操作按钮样式 */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.action-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.style-selector {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.25rem;
+    border-radius: 4px;
+    background: var(--bg-color);
+}
+
+.style-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.style-btn:hover {
+    background-color: var(--hover-color);
+    border-color: var(--primary-color);
+}
+
+.style-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* 字体列表样式 */
+.font-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1rem;
+    padding: 10px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.font-item {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    background: white;
+    transition: all 0.2s ease;
+    min-width: 100px;
+    text-align: center;
+}
+
+.font-item:hover {
+    background: var(--bg-color);
+    border-color: var(--primary-color);
+}
+
+.font-item.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* 字号控制样式调整 */
+.font-size-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;  /* 减小间距 */
+    padding: 0 8px;  /* 减小内边距 */
+    background: var(--bg-color);
+    border-radius: 4px;
+    min-width: 180px;  /* 稍微减小宽度 */
+}
+
+.font-size-slider {
+    flex: 1;
+    height: 4px;
+    -webkit-appearance: none;
+    background: var(--border-color);
+    border-radius: 2px;
+    outline: none;
+}
+
+.font-size-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.font-size-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.font-size-display {
+    min-width: 45px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+/* 上传按钮悬停效果 */
+.upload-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* 工具按钮悬停效果 */
+.tool-btn:hover {
+    background-color: var(--hover-color);
+    border-color: var(--primary-color);
+}
+
+/* 字体按钮悬停效果 */
+.font-item:hover {
+    background-color: var(--hover-color);
+    border-color: var(--primary-color);
+}
+
+/* 滑块样式更新 */
+.font-size-slider::-webkit-slider-thumb {
+    background-color: var(--primary-color);
+}
+
+.font-size-slider::-webkit-slider-thumb:hover {
+    background-color: var(--secondary-color);
+}
+
+/* 操作按钮样式更新 */
+.action-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* 样式选择器按钮更新 */
+.style-btn:hover {
+    background-color: var(--hover-color);
+    border-color: var(--primary-color);
+}
+
+/* 页脚样式 */
+.footer {
+    margin-top: 4rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.footer-section h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.footer-section p {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* 谷歌三原色效果 */
+.footer-section.blue {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.footer-section.red {
+    color: var(--secondary-color);
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+.footer-section.yellow {
+    color: var(--accent-color);
+    border-bottom: 3px solid var(--accent-color);
+}
+
+/* 悬停效果 */
+.footer-section:hover {
+    transform: translateY(-5px);
+}
+
+.footer-section.blue:hover {
+    background-color: rgba(66, 133, 244, 0.1);
+}
+
+.footer-section.red:hover {
+    background-color: rgba(219, 68, 55, 0.1);
+}
+
+.footer-section.yellow:hover {
+    background-color: rgba(244, 180, 0, 0.1);
+}
+
+/* 标题区域样式 */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.title-section {
+    text-align: left;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.copyright-info {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.copyright-info .blue {
+    color: var(--primary-color);
+}
+
+/* 上传按钮区域样式调整 */
+.font-upload-section {
+    display: flex;
+    align-items: center;
+}
+
+/* 移除之前的绝对定位相关样式 */
+.style-selector {
+    position: static;
+    transform: none;
+    margin: 0;
+    box-shadow: none;
+} 
